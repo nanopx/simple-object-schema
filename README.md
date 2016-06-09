@@ -25,8 +25,9 @@ import Schema from 'simple-object-schema'
 ## Examples
 
 ### ES2015
+
 ```JavaScript
-import Schema, { messageTypes } from '../lib';
+import Schema, { messageTypes } from 'simple-object-schema';
 
 class FooSchema extends Schema {
   constructor(options) {
@@ -54,6 +55,8 @@ console.log(results);
 // { values: { id: 100, name: 'nanopx', createdAt: 1465487357721 },
 //   errors: null }
 ```
+
+### Using `require()`
 
 ```JavaScript
 const Schema = require('simple-object-schema').default;
