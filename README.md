@@ -25,8 +25,8 @@ import Schema from 'simple-object-schema'
 ## Examples
 
 ```JavaScript
-const Schema = require('../lib').default;
-const messageTypes = require('../lib').messageTypes;
+const Schema = require('simple-object-schema').default;
+const messageTypes = require('simple-object-schema').messageTypes;
 
 const validator = new Schema();
 
