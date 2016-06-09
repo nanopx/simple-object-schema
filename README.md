@@ -11,7 +11,7 @@ $ npm install simple-object-schema --save
 ```
 
 ```JavaScript
-const Validator = require('./lib').default;
+const Schema = require('./lib').default;
 // const messageTypes = require('./lib').messageTypes;
 ```
 
@@ -25,10 +25,10 @@ import Schema from 'simple-object-schema'
 ## Examples
 
 ```JavaScript
-const Validator = require('../lib').default;
+const Schema = require('../lib').default;
 const messageTypes = require('../lib').messageTypes;
 
-const validator = new Validator();
+const validator = new Schema();
 
 const schema = {
   foo: validator.define.type(Number).min(100).max(200).equalsTo(150).isRequired().label('FOO'),
@@ -58,7 +58,7 @@ console.log(validator.validate({ foo: 10000, bar: 'string', baz: 'helo', notDefi
 // Fail, with partially overridden message
 const locale = {};
 locale[messageTypes.IS_REQUIRED] = '{{name}} IS REQUIRED!';
-const validator2 = new Validator({ locale: locale });
+const validator2 = new Schema({ locale: locale });
 console.log(validator2.validate({ foo: null, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello' }, schema));
 // { values: null,
 //   errors:
@@ -72,7 +72,7 @@ console.log(validator2.validate({ foo: null, bar: 'string', baz: 'helo', notDefi
 
 
 // Using locale preset
-const validator3 = new Validator({ locale: Validator.locales.ja });
+const validator3 = new Schema({ locale: Schema.locales.ja });
 console.log(validator3.validate({ foo: null, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello', abc: 'FOO' }, schema));
 // { values: null,
 //   errors:
