@@ -1,13 +1,13 @@
 # simple-object-schema
 Simple schema for JavaScript objects, with validation and flexible error messages.
 
-** WIP **
+** HEAVILY WIP **
 
 
 ## Usage
 
 ```bash
-$ npm install simple-object-schema
+$ npm install simple-object-schema --save
 ```
 
 ```JavaScript
