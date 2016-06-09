@@ -3,11 +3,11 @@ export function isObjectLike(value) {
 }
 
 export function stringifyObject(obj) {
-  return stringifyObject(obj);
+  return Object.prototype.toString.call(obj);
 }
 
 export function isDate(date) {
-  return isObjectLike(date) && stringifyObject(date) === '[object Date]';
+  return isNumber(date) || (isObjectLike(date) && stringifyObject(date) === '[object Date]') || isNumber(Date.parse(date));
 }
 
 export function isBuffer(b) {
