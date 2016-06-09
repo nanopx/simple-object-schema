@@ -1,6 +1,14 @@
 import * as messageTypes from '../messageTypes';
 
 export default {
+  __types__: {
+    Array: 'Array',
+    Boolean: 'Boolean',
+    Buffer: 'Buffer',
+    Date: 'Date',
+    Number: 'Number',
+    String: 'String',
+  },
   [messageTypes.KEY_NOT_DEFINED_IN_SCHEMA]: 'Key "{{key}}" is not defined in schema',
   [messageTypes.IS_REQUIRED]: '"{{name}}" is required',
   [messageTypes.TYPE_MUST_BE_STRING]: '"{{name}}" must be a "{{type}}"',
@@ -11,7 +19,7 @@ export default {
   [messageTypes.TYPE_MUST_BE_ARRAY]: '"{{name}}" must be an "{{type}}"',
   [messageTypes.TYPE_MUST_BE_ONE_OF]: '"{{name}}" must be one of "{{type}}", but the type of given value was "{{typeOfValue}}"',
   [messageTypes.MATCH_DOES_NOT_MATCH_PATTERN]: '"{{name}}" does not match pattern "{{match}}"',
-  [messageTypes.IN_DOES_NOT_MATCH_VALUES]: '"{{name}}" ',
+  [messageTypes.IN_DOES_NOT_MATCH_VALUES]: '"{{name}}" must match one of "{{in}}"',
   [messageTypes.MIN_MUST_BE_GREATER_THAN]: '"{{name}}" must be greater than {{min}}',
   [messageTypes.MIN_MUST_BE_GREATER_THAN_CHAR]: '"{{name}}" must be greater than {{min}} characters',
   [messageTypes.MAX_MUST_BE_LESS_THAN]: '"{{name}}" must be less than {{max}}',

@@ -7,7 +7,7 @@ const schema = {
   foo: validator.define.type(Number).min(100).max(200).equalsTo(150).isRequired().label('FOO'),
   bar: validator.define.type([Number, Boolean]).defaultsTo(100).isRequired().label('BAR'),
   baz: validator.define.type(String).match(/hello/).isRequired(),
-  abc: validator.define.type(String).in(['ABC']),
+  abc: validator.define.type(String).in(['ABC', 'DEF']),
 };
 
 // Pass

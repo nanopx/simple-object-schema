@@ -29,10 +29,15 @@ class Schema {
     return new SchemaDefinition();
   }
 
+  _translateTypeName(t) {
+    const typeNames = this._options.locale.__types__;
+    return typeNames && typeNames[t] ? typeNames[t] : t;
+  }
+
   _translate(messageType, context = {}) {
     const locale = this._options.locale;
     if (!locale[messageType]) {
-      throw new Error(`Cannot find message for type: "${messageType}" for locale: "${locale}"`);
+      throw new Error(`Cannot find message for message type: "${messageType}"`);
     }
 
     let message = locale[messageType];
@@ -43,21 +48,29 @@ class Schema {
 
     // if 'type' property exists in context
     if (context.hasOwnProperty('type')) {
-
       // set the function name
       if (typeof context.type === 'function' && context.type.name) {
-        context.type = context.type.name;
+        context.type = this._translateTypeName(context.type.name);
       }
 
       // if the value is an array of function, set it to comma-separated function names
       if (utils.isArray(context.type)) {
         context.type = context.type.map((t) => {
           if (typeof t === 'function' && t.name) {
-            return t.name;
+            return this._translateTypeName(t.name);
           }
           return t;
         }).join(', ');
       }
+    }
+
+    if (context.hasOwnProperty('typeOfValue')) {
+      context.typeOfValue = this._translateTypeName(context.typeOfValue);
+    }
+
+    // if 'in' property exists in context
+    if (context.hasOwnProperty('in')) {
+      context.in = context.in.join(', ');
     }
 
     Object.keys(context).forEach((key) => {

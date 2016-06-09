@@ -39,7 +39,7 @@ export default {
     (value, re) => re.test(value) ? null : c.MATCH_DOES_NOT_MATCH_PATTERN,
   ],
   in: [
-    (value, options) => options.indexOf(value) === -1 ? null : c.IN_DOES_NOT_MATCH_VALUES,
+    (value, options) => options.indexOf(value) < 0 ? c.IN_DOES_NOT_MATCH_VALUES : null,
   ],
   min: [
     (value, min) => utils.isNumber(value) && value < min ? c.MIN_MUST_BE_GREATER_THAN : null,
