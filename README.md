@@ -6,19 +6,19 @@ Simple schema for JavaScript objects, with validation and flexible error message
 
 ## Usage
 
-```bash
+```
 $ npm install simple-object-schema --save
 ```
 
 ```JavaScript
-const Schema = require('./lib').default;
-// const messageTypes = require('./lib').messageTypes;
+const Schema = require('simple-object-schema').default;
+const messageTypes = require('simple-object-schema').messageTypes;
 ```
 
 or with `import`
 
 ```JavaScript
-import Schema from 'simple-object-schema'
+import Schema, { messageTypes } from 'simple-object-schema'
 ```
 
 
