@@ -12,6 +12,17 @@
   ],
   "author": "nanopx",
   "license": "MIT",
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanopx/simple-object-schema.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nanopx/simple-object-schema/issues"
+  },
+  "homepage": "https://github.com/nanopx/simple-object-schema#readme",
   "dependencies": {},
   "devDependencies": {
     "babel": "^6.5.2",
