@@ -1,10 +1,11 @@
 {
   "name": "simple-object-schema",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple schema for JavaScript objects, with validation and flexible error messages.",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel -d lib/ src/",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
