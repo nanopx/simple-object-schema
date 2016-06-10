@@ -106,7 +106,7 @@ class Schema {
   //   return this;
   // }
 
-  validateEntry(key, schema, inputValue = null) {
+  validateEntry(key, schema, inputValue) {
     const errors = [];
     let value = inputValue;
     let name = key;
@@ -117,19 +117,18 @@ class Schema {
     }
 
     // Default values
-    if (schema.hasOwnProperty('defaultsTo') && value === null) {
+    if (schema.hasOwnProperty('defaultsTo') && !value) {
       value = schema.defaultsTo;
     }
 
     // Required values
-    if (schema.isRequired && !value && value !== false && value !== 0) {
+    if (schema.isRequired && value === undefined) {
       errors.push(this._translate(messageTypes.IS_REQUIRED, { name }));
     }
 
     // Skip validation if it is not required
-    if (!schema.isRequired && !value && value === null) {
-      // Set value to undefined, so it doesn't set the current value to the return values
-      return { value: undefined, errors };
+    if (!schema.isRequired && !value) {
+      return { value: inputValue, errors };
     }
 
     // Validations
