@@ -98,13 +98,13 @@ class Schema {
     });
   }
 
-  addValidationForType(type, fn) {
-    if (!this.validations[type]) {
-      this.validations[type] = [];
-    }
-    this.validations[type].push(fn);
-    return this;
-  }
+  // addValidationForType(type, fn) {
+  //   if (!this.validations[type]) {
+  //     this.validations[type] = [];
+  //   }
+  //   this.validations[type].push(fn);
+  //   return this;
+  // }
 
   validateEntry(key, schema, inputValue = null) {
     const errors = [];
@@ -135,17 +135,15 @@ class Schema {
     Object.keys(schema).forEach((type) => {
       const schemaConfigValue = schema[type];
       if (this.validations[type]) {
-        this.validations[type].forEach((validate) => {
-          const messageType = validate(value, schemaConfigValue);
-          if (messageType) {
-            errors.push(this._translate(messageType, {
-              name,
-              value,
-              validation: type,
-              [type]: schemaConfigValue,
-              typeOfValue: utils.capitalizeFirstLetter(typeof value),
-            }));
-          }
+        const messages = utils.traverseValidations(this.validations[type], value, schemaConfigValue);
+        messages.forEach((message) => {
+          errors.push(this._translate(message, {
+            name,
+            value,
+            validation: type,
+            [type]: schemaConfigValue,
+            typeOfValue: utils.capitalizeFirstLetter(typeof value),
+          }));
         });
       }
     });

@@ -52,7 +52,7 @@ export default {
           ].filter((results) => results)[0];
         }).filter((results) => results) || null;
 
-        if (!fails || fails.length === 1) return null;
+        if (!fails || fails.length < type.length) return null;
 
         return c.TYPE_MUST_BE_ONE_OF;
       }

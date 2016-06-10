@@ -1,23 +1,23 @@
 const Schema = require('../lib').default;
 const messageTypes = require('../lib').messageTypes;
 
-const validator = new Schema();
+const schema = new Schema();
 
-const schema = {
-  foo: validator.define.type(Number).min(100).max(200).equalsTo(150).isRequired().label('FOO'),
-  bar: validator.define.type([Number, Boolean]).defaultsTo(100).isRequired().label('BAR'),
-  baz: validator.define.type(String).match(/hello/).isRequired(),
-  abc: validator.define.type(String).in(['ABC', 'DEF']),
+const fooSchema = {
+  foo: schema.define.type(Number).min(100).max(200).equalsTo(150).isRequired().label('FOO'),
+  bar: schema.define.type([Number, Boolean]).defaultsTo(100).isRequired().label('BAR'),
+  baz: schema.define.type(String).match(/hello/).isRequired(),
+  abc: schema.define.type(String).in(['ABC', 'DEF']),
 };
 
 // Pass
-console.log(validator.validate({ foo: 150, bar: undefined, baz: 'hello' }, schema));
+console.log(schema.validate({ foo: 150, bar: undefined, baz: 'hello' }, fooSchema));
 // { values: { foo: 150, bar: 100, baz: 'hello', abc: null },
 //   errors: null }
 
 
 // Fail
-console.log(validator.validate({ foo: 10000, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello' }, schema));
+console.log(schema.validate({ foo: 10000, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello' }, fooSchema));
 // { values: null,
 //   errors:
 //    { __root__: [ 'Key "notDefinedInSchema" is not defined in schema' ],
@@ -31,8 +31,8 @@ console.log(validator.validate({ foo: 10000, bar: 'string', baz: 'helo', notDefi
 // Fail, with partially overridden message
 const locale = {};
 locale[messageTypes.IS_REQUIRED] = '{{name}} IS REQUIRED!';
-const validator2 = new Schema({ locale: locale });
-console.log(validator2.validate({ foo: null, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello' }, schema));
+const schema2 = new Schema({ locale: locale });
+console.log(schema2.validate({ foo: null, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello' }, fooSchema));
 // { values: null,
 //   errors:
 //    { __root__: [ 'Key "notDefinedInSchema" is not defined in schema' ],
@@ -45,8 +45,8 @@ console.log(validator2.validate({ foo: null, bar: 'string', baz: 'helo', notDefi
 
 
 // Using locale preset
-const validator3 = new Schema({ locale: Schema.locales.ja });
-console.log(validator3.validate({ foo: null, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello', abc: 'FOO' }, schema));
+const schema3 = new Schema({ locale: Schema.locales.ja });
+console.log(schema3.validate({ foo: null, bar: 'string', baz: 'helo', notDefinedInSchema: 'hello', abc: 'FOO' }, fooSchema));
 // { values: null,
 //   errors:
 //    { __root__: [ 'スキーマに"notDefinedInSchema"が定義されていません。' ],

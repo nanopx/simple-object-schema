@@ -39,11 +39,16 @@ export function isNumber(n) {
 }
 
 export function isDate(date) {
+  const parsedDate = Date.parse(date);
   return (
     isNumber(date) ||
-    isNumber(Date.parse(date)) ||
+    (!isNaN(parsedDate) && isNumber(parsedDate)) ||
     (isObjectLike(date) && stringifyObject(date) === '[object Date]')
   );
+}
+
+export function isRegExp(re) {
+  return stringifyObject(re) === '[object RegExp]';
 }
 
 export function isSupportedType(t) {
@@ -60,4 +65,15 @@ export function isSupportedType(t) {
 
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function traverseValidations(validations, value, option) {
+  const messages = [];
+  validations.forEach((validation) => {
+    const messageType = validation(value, option);
+    if (messageType) {
+      messages.push(messageType);
+    }
+  });
+  return messages;
 }

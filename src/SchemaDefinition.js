@@ -45,8 +45,39 @@ class SchemaDefinition {
     return this;
   }
 
+  isRequired() {
+    this.define('isRequired', true);
+    return this;
+  }
+
+  defaultsTo(defaultValue) {
+    this.define('defaultsTo', defaultValue);
+    return this;
+  }
+
+  label(name) {
+    if (!name) {
+      return this._throwInvalidDefinition('label', 'name is required');
+    }
+
+    this.define('label', name);
+    return this;
+  }
+
+  equalsTo(value) {
+    this.define('equalsTo', value);
+    return this;
+  }
+
   match(re) {
-    // TODO: check valid regex
+    if (!re) {
+      return this._throwInvalidDefinition('match', 'argument is required');
+    }
+
+    if (!utils.isRegExp(re)) {
+      return this._throwInvalidDefinition('match', 'argument must be an regular expression');
+    }
+
     this.define('match', re);
     return this;
   }
@@ -61,11 +92,6 @@ class SchemaDefinition {
     }
 
     this.define('in', values);
-    return this;
-  }
-
-  defaultsTo(defaultValue) {
-    this.define('defaultsTo', defaultValue);
     return this;
   }
 
@@ -84,25 +110,6 @@ class SchemaDefinition {
     }
 
     this.define('max', _max);
-    return this;
-  }
-
-  equalsTo(value) {
-    this.define('equalsTo', value);
-    return this;
-  }
-
-  isRequired() {
-    this.define('isRequired', true);
-    return this;
-  }
-
-  label(name) {
-    if (!name) {
-      return this._throwInvalidDefinition('label', 'name is required');
-    }
-
-    this.define('label', name);
     return this;
   }
 }

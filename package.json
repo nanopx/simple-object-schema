@@ -7,7 +7,7 @@
     "build": "babel -d lib/ src/",
     "prepublish": "npm run build",
     "lint": "eslint src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "babel-tape-runner test/* | tap-spec"
   },
   "keywords": [
     "validation"
@@ -33,9 +33,10 @@
     "babel-eslint": "^6.0.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.0.1",
+    "babel-tape-runner": "^2.0.1",
     "eslint": "^2.11.1",
-    "eslint-plugin-babel": "^3.2.0"
+    "eslint-plugin-babel": "^3.2.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
   }
 }
