@@ -1,6 +1,5 @@
 import test from 'tape';
 import SchemaDefinition, { SCHEMA_KEY } from '../src/SchemaDefinition';
-import * as messageTypes from '../src/messageTypes';
 
 const define = new SchemaDefinition();
 
