@@ -128,7 +128,8 @@ class Schema {
 
     // Skip validation if it is not required
     if (!schema.isRequired && !value && value === null) {
-      return { value, errors };
+      // Set value to undefined, so it doesn't set the current value to the return values
+      return { value: undefined, errors };
     }
 
     // Validations
@@ -165,7 +166,9 @@ class Schema {
       if (result.errors.length) {
         errors[key] = result.errors;
       }
-      values[key] = result.value;
+      if (result.value !== undefined) {
+        values[key] = result.value;
+      }
     });
 
     if (Object.keys(errors).length) {
