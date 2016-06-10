@@ -1,9 +1,6 @@
 # simple-object-schema
 Simple schema for JavaScript objects, with validation and flexible error messages.
 
-**WIP**
-
-
 ## Usage
 
 ```
@@ -119,3 +116,11 @@ console.log(schema3.validate({ foo: null, bar: 'string', baz: 'helo', notDefined
 //      baz: [ '"baz"は正規表現の"/hello/"に一致しませんでした。' ],
 //      abc: [ '"abc"は"ABC, DEF"の何れかと一致しなければなりません。' ] } }
 ```
+
+### Todo
+
+- [ ] Add more docs
+
+### License
+
+MIT
