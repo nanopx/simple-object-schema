@@ -70,7 +70,7 @@ const fooSchema = {
 
 // Pass
 console.log(schema.validate({ foo: 150, bar: undefined, baz: 'hello' }, fooSchema));
-// { values: { foo: 150, bar: 100, baz: 'hello', abc: null },
+// { values: { foo: 150, bar: 100, baz: 'hello' },
 //   errors: null }
 
 
