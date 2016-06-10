@@ -1,5 +1,4 @@
-/* eslint-disable */
-import SchemaDefinition, { SCHEMA_KEY, OPTIONS_KEY } from './SchemaDefinition';
+import SchemaDefinition, { SCHEMA_KEY } from './SchemaDefinition';
 import * as utils from './utils';
 import * as locales from './locales';
 import validations from './validations';
@@ -8,7 +7,7 @@ import * as messageTypes from './messageTypes';
 class Schema {
   _options = {
     locale: locales.en,
-    rootErrorKey: '__root__'
+    rootErrorKey: '__root__',
   };
 
   validations = validations;
@@ -74,7 +73,7 @@ class Schema {
     }
 
     Object.keys(context).forEach((key) => {
-      let replaceTo = context[key];
+      const replaceTo = context[key];
       message = message.replace(RegExp(`{{${key}}}`, 'g'), replaceTo);
     });
 

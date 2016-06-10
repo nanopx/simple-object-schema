@@ -6,10 +6,6 @@ export function stringifyObject(obj) {
   return Object.prototype.toString.call(obj);
 }
 
-export function isDate(date) {
-  return isNumber(date) || (isObjectLike(date) && stringifyObject(date) === '[object Date]') || isNumber(Date.parse(date));
-}
-
 export function isBuffer(b) {
   return typeof b === 'object' || b instanceof Buffer;
 }
@@ -39,6 +35,14 @@ export function isNumber(n) {
   return (
     (typeof n === 'number' || (isObjectLike(n) && stringifyObject(n) === '[object Number]')) &&
     !isString(n)
+  );
+}
+
+export function isDate(date) {
+  return (
+    isNumber(date) ||
+    isNumber(Date.parse(date)) ||
+    (isObjectLike(date) && stringifyObject(date) === '[object Date]')
   );
 }
 

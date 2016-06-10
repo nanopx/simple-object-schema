@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as utils from './utils';
 
 export const SCHEMA_KEY = Symbol('SchemaDefinition::_schema');
@@ -48,7 +47,7 @@ class SchemaDefinition {
 
   match(re) {
     // TODO: check valid regex
-    this.define('match', re)
+    this.define('match', re);
     return this;
   }
 

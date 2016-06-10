@@ -1,12 +1,35 @@
 import * as utils from './utils';
 import * as c from './messageTypes';
 
-const checkString = (value, type) => type === String ? (utils.isString(value) ? null : c.TYPE_MUST_BE_STRING) : null;
-const checkNumber = (value, type) => type === Number ? (utils.isNumber(value) ? null : c.TYPE_MUST_BE_NUMBER) : null;
-const checkBoolean = (value, type) => type === Boolean ? (utils.isBoolean(value) ? null : c.TYPE_MUST_BE_BOOLEAN) : null;
-const checkBuffer = (value, type) => type === Buffer ? (utils.isBuffer(value) ? null : c.TYPE_MUST_BE_BUFFER) : null;
-const checkDate = (value, type) => type === Date ? (utils.isDate(value) ? null : c.TYPE_MUST_BE_DATE) : null;
-const checkArray = (value, type) => type === Array ? (utils.isArray(value) ? null : c.TYPE_MUST_BE_ARRAY) : null;
+const checkString = (value, type) => {
+  if (type !== String) return null;
+  return utils.isString(value) ? null : c.TYPE_MUST_BE_STRING;
+};
+
+const checkNumber = (value, type) => {
+  if (type !== Number) return null;
+  return utils.isNumber(value) ? null : c.TYPE_MUST_BE_NUMBER;
+};
+
+const checkBoolean = (value, type) => {
+  if (type !== Boolean) return null;
+  return utils.isBoolean(value) ? null : c.TYPE_MUST_BE_BOOLEAN;
+};
+
+const checkBuffer = (value, type) => {
+  if (type !== Buffer) return null;
+  return utils.isBuffer(value) ? null : c.TYPE_MUST_BE_BUFFER;
+};
+
+const checkDate = (value, type) => {
+  if (type !== Date) return null;
+  return utils.isDate(value) ? null : c.TYPE_MUST_BE_DATE;
+};
+
+const checkArray = (value, type) => {
+  if (type !== Array) return null;
+  return utils.isArray(value) ? null : c.TYPE_MUST_BE_ARRAY;
+};
 
 export default {
   type: [
@@ -33,10 +56,10 @@ export default {
 
         return c.TYPE_MUST_BE_ONE_OF;
       }
-    }
+    },
   ],
   match: [
-    (value, re) => re.test(value) ? null : c.MATCH_DOES_NOT_MATCH_PATTERN,
+    (value, re) => !re.test(value) ? c.MATCH_DOES_NOT_MATCH_PATTERN : null,
   ],
   in: [
     (value, options) => options.indexOf(value) < 0 ? c.IN_DOES_NOT_MATCH_VALUES : null,
@@ -50,6 +73,6 @@ export default {
     (value, max) => utils.isString(value) && value.length > max ? c.MAX_MUST_BE_LESS_THAN_CHAR : null,
   ],
   equalsTo: [
-    (value, target) => value === target ? null : c.EQUALS_TO_MUST_BE_EQUAL,
-  ]
-}
+    (value, target) => value !== target ? c.EQUALS_TO_MUST_BE_EQUAL : null,
+  ],
+};
