@@ -122,7 +122,7 @@ class Schema {
     }
 
     // Required values
-    if (schema.isRequired && (!value && value !== null)) {
+    if (schema.isRequired && (!value && value !== null && typeof value !== 'boolean')) {
       errors.push(this._translate(messageTypes.IS_REQUIRED, { name }));
     }
 
